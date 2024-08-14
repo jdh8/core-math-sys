@@ -6,13 +6,12 @@ fn main() -> anyhow::Result<()> {
     bindgen::Builder::default()
         .header("include/math.h")
         .use_core()
-        .allowlist_file("include/*")
         .parse_callbacks(Box::new(bindgen::CargoCallbacks::new()))
         .generate()?
         .write_to_file(std::path::PathBuf::from(out_dir).join("bindings.rs"))?;
 
     cc::Build::new()
-        .files(glob::glob("vendor/src/binary{32,64}/**/*.c")?.flatten())
+        .files(glob::glob("vendor/src/binary{32,64}/*/*.c")?.flatten())
         .std("c11")
         .try_compile("m")?;
 
