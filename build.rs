@@ -23,13 +23,13 @@ fn main() -> anyhow::Result<()> {
         .generate()?
         .write_to_file(std::path::PathBuf::from(out_dir).join("bindings.rs"))?;
 
-    let f32_sources = get_source_files(glob::glob("vendor/src/binary32/*/")?, "f.c");
-    let f64_sources = get_source_files(glob::glob("vendor/src/binary64/*/")?, ".c");
-
     let mut builder = cc::Build::new();
-
     builder
-        .files(f32_sources.chain(f64_sources))
+        .files(
+            core::iter::once(std::path::PathBuf::from("lib/signgam.c"))
+                .chain(get_source_files(glob::glob("vendor/src/binary32/*/")?, "f.c"))
+                .chain(get_source_files(glob::glob("vendor/src/binary64/*/")?, ".c")),
+        )
         .include("include");
 
     // Builtin compiler is too old to handle __builtin_roundeven
