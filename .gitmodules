@@ -1,0 +1,4 @@
+[submodule "vendor"]
+	path = vendor
+	url = https://gitlab.inria.fr/core-math/core-math.git
+	branch = master

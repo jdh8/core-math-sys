@@ -1,0 +1,19 @@
+[package]
+name = "core-math-sys"
+version = "0.0.1"
+authors = ["Chen-Pang He (https://jdh8.org)"]
+edition = "2021"
+description = "Generate bindings to CORE-MATH"
+repository = "https://github.com/jdh8/core-math-sys"
+license = "MIT"
+categories = ["mathematics"]
+keywords = ["floating-point", "trigonometry", "exponential", "logarithm", "special-functions"]
+
+[profile.dev]
+opt-level = 3
+
+[build-dependencies]
+anyhow = "1.0.86"
+bindgen = "0.69.4"
+cc = { version = "1.1.11", features = ["parallel"] }
+glob = "0.3.1"
