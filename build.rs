@@ -36,6 +36,6 @@ fn main() -> anyhow::Result<()> {
     #[cfg(target_os = "macos")]
     builder.compiler("clang");
 
-    builder.try_compile("m")?;
+    builder.try_compile("core-math")?;
     Ok(())
 }
