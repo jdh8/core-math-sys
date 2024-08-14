@@ -12,7 +12,6 @@ fn main() -> anyhow::Result<()> {
         .write_to_file(std::path::PathBuf::from(out_dir).join("bindings.rs"))?;
 
     cc::Build::new()
-        .cpp(true)
         .files(glob::glob("vendor/src/binary{32,64}/**/*.c")?.flatten())
         .std("c11")
         .try_compile("m")?;
