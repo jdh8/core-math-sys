@@ -8,6 +8,7 @@ repository = "https://github.com/jdh8/core-math-sys"
 license = "MIT"
 categories = ["mathematics"]
 keywords = ["floating-point", "trigonometry", "exponential", "logarithm", "special-functions"]
+exclude = ["/vendor/**/*.wc", "/vendor/doc"]
 
 [profile.dev]
 opt-level = 3
