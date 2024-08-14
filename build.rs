@@ -26,10 +26,16 @@ fn main() -> anyhow::Result<()> {
     let f32_sources = get_source_files(glob::glob("vendor/src/binary32/*/")?, "f.c");
     let f64_sources = get_source_files(glob::glob("vendor/src/binary64/*/")?, ".c");
 
-    cc::Build::new()
-        .files(f32_sources.chain(f64_sources))
-        .include("include")
-        .try_compile("m")?;
+    let mut builder = cc::Build::new();
 
+    builder
+        .files(f32_sources.chain(f64_sources))
+        .include("include");
+
+    // Builtin compiler is too old to handle __builtin_roundeven
+    #[cfg(target_os = "macos")]
+    builder.compiler("clang");
+
+    builder.try_compile("m")?;
     Ok(())
 }
