@@ -17,7 +17,7 @@ fn main() -> anyhow::Result<()> {
     let out_dir = std::env::var_os("OUT_DIR").context("OUT_DIR not set")?;
 
     bindgen::Builder::default()
-        .header("include/math.h")
+        .header("include/core-math.h")
         .use_core()
         .parse_callbacks(Box::new(bindgen::CargoCallbacks::new()))
         .generate()?
@@ -36,7 +36,7 @@ fn main() -> anyhow::Result<()> {
                     ".c",
                 )),
         )
-        .include("include")
+        //.include("include")
         .flag_if_supported({
             let mut flag: std::ffi::OsString = "-march=".into();
             flag.push(std::env::var_os("TARGET_CPU").unwrap_or_else(|| "native".into()));
