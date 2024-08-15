@@ -6,7 +6,7 @@ edition = "2021"
 description = "Generate bindings to CORE-MATH"
 repository = "https://github.com/jdh8/core-math-sys"
 license = "MIT"
-categories = ["mathematics"]
+categories = ["mathematics", "no-std"]
 keywords = ["floating-point", "trigonometry", "exponential", "logarithm", "special-functions"]
 exclude = ["/vendor/**/*.wc", "/vendor/doc"]
 
