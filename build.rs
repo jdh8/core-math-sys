@@ -23,20 +23,16 @@ fn main() -> anyhow::Result<()> {
         .generate()?
         .write_to_file(std::path::PathBuf::from(out_dir).join("bindings.rs"))?;
 
+    let f32_sources = get_source_files(glob::glob("vendor/src/binary32/*/")?, "f.c");
+    let f64_sources = get_source_files(glob::glob("vendor/src/binary64/*/")?, ".c");
+
     let mut builder = cc::Build::new();
     builder
         .files(
             core::iter::once(std::path::PathBuf::from("lib/signgam.c"))
-                .chain(get_source_files(
-                    glob::glob("vendor/src/binary32/*/")?,
-                    "f.c",
-                ))
-                .chain(get_source_files(
-                    glob::glob("vendor/src/binary64/*/")?,
-                    ".c",
-                )),
+                .chain(f32_sources)
+                .chain(f64_sources),
         )
-        //.include("include")
         .flag_if_supported({
             let mut flag: std::ffi::OsString = "-march=".into();
             flag.push(std::env::var_os("TARGET_CPU").unwrap_or_else(|| "native".into()));
