@@ -6,11 +6,21 @@ _Scalar _MATHCALL(fabs)(_Scalar);
 _Scalar _MATHCALL(fmod)(_Scalar, _Scalar);
 
 _Scalar _MATHCALL(exp)(_Scalar);
+_Scalar _MATHCALL(expm1)(_Scalar);
+_Scalar _MATHCALL(exp2)(_Scalar);
+_Scalar _MATHCALL(exp2m1)(_Scalar);
+_Scalar _MATHCALL(exp10)(_Scalar);
+_Scalar _MATHCALL(exp10m1)(_Scalar);
 _Scalar _MATHCALL(log)(_Scalar);
+_Scalar _MATHCALL(log1p)(_Scalar);
+_Scalar _MATHCALL(log2)(_Scalar);
+_Scalar _MATHCALL(log2p1)(_Scalar);
 _Scalar _MATHCALL(log10)(_Scalar);
+_Scalar _MATHCALL(log10p1)(_Scalar);
 
 _Scalar _MATHCALL(pow)(_Scalar, _Scalar);
 _Scalar _MATHCALL(sqrt)(_Scalar);
+_Scalar _MATHCALL(rsqrt)(_Scalar);
 
 _Scalar _MATHCALL(sin)(_Scalar);
 _Scalar _MATHCALL(cos)(_Scalar);
@@ -19,6 +29,14 @@ _Scalar _MATHCALL(asin)(_Scalar);
 _Scalar _MATHCALL(acos)(_Scalar);
 _Scalar _MATHCALL(atan)(_Scalar);
 _Scalar _MATHCALL(atan2)(_Scalar, _Scalar);
+
+_Scalar _MATHCALL(sinpi)(_Scalar);
+_Scalar _MATHCALL(cospi)(_Scalar);
+_Scalar _MATHCALL(tanpi)(_Scalar);
+_Scalar _MATHCALL(asinpi)(_Scalar);
+_Scalar _MATHCALL(acospi)(_Scalar);
+_Scalar _MATHCALL(atanpi)(_Scalar);
+_Scalar _MATHCALL(atan2pi)(_Scalar, _Scalar);
 
 _Scalar _MATHCALL(sinh)(_Scalar);
 _Scalar _MATHCALL(cosh)(_Scalar);
@@ -31,7 +49,6 @@ _Scalar _MATHCALL(frexp)(_Scalar, int*);
 _Scalar _MATHCALL(ldexp)(_Scalar, int);
 _Scalar _MATHCALL(modf)(_Scalar, _Scalar*);
 
-#if __STDC_VERSION__ >= 199901L || __cplusplus >= 201103L
 _Scalar _MATHCALL(remainder)(_Scalar, _Scalar);
 _Scalar _MATHCALL(remquo)(_Scalar, _Scalar, int*);
 _Scalar _MATHCALL(fma)(_Scalar, _Scalar, _Scalar);
@@ -39,11 +56,6 @@ _Scalar _MATHCALL(fmax)(_Scalar, _Scalar);
 _Scalar _MATHCALL(fmin)(_Scalar, _Scalar);
 _Scalar _MATHCALL(fdim)(_Scalar, _Scalar);
 _Scalar _MATHCALL(nan)(const char*);
-
-_Scalar _MATHCALL(exp2)(_Scalar);
-_Scalar _MATHCALL(expm1)(_Scalar);
-_Scalar _MATHCALL(log2)(_Scalar);
-_Scalar _MATHCALL(log1p)(_Scalar);
 
 _Scalar _MATHCALL(cbrt)(_Scalar);
 _Scalar _MATHCALL(hypot)(_Scalar, _Scalar);
@@ -76,4 +88,3 @@ _Scalar _MATHCALL(nextafter)(_Scalar, _Scalar);
 // Disabled because long double is not supported
 // _Scalar _MATHCALL(nexttoward)(_Scalar, long double);
 _Scalar _MATHCALL(copysign)(_Scalar, _Scalar);
-#endif

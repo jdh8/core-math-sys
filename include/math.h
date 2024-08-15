@@ -18,7 +18,19 @@
 #define MATH_ERRNO     1
 #define MATH_ERREXCEPT 2
 
-#if __STDC_VERSION__ >= 199901L
+#if __STDC_VERSION__ >= 201112L
+#define _TGMATH_REAL(x, function) _Generic(x, \
+    float: function##f,                       \
+    default: function,                        \
+    long double: function##l                  \
+)
+#else
+#define _TGMATH_REAL(x, function) __builtin_choose_expr(                                    \
+    __builtin_types_compatible_p(__typeof__(x), float), function##f, __builtin_choose_expr( \
+    __builtin_types_compatible_p(__typeof__(x), long double), function##l, function         \
+))
+#endif
+
 #define fpclassify(x) __builtin_fpclassify(FP_NAN, FP_INFINITE, FP_NORMAL, FP_SUBNORMAL, FP_ZERO, x)
 #define isfinite(x)   __builtin_isfinite(x)
 #define isinf(x)      __builtin_isinf(x)
@@ -31,11 +43,6 @@
 #define islessequal(x, y)    __builtin_islessequal(x, y)
 #define islessgreater(x, y)  __builtin_islessgreater(x, y)
 #define isunordered(x, y)    __builtin_isunordered(x, y)
-#endif /* C99 */
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 extern int signgam;
 
@@ -50,10 +57,6 @@ extern int signgam;
 #include "bits/mathcalls.h"
 #undef _Scalar
 #undef _SUFFIX
-
-#ifdef __cplusplus
-} // extern "C"
-#endif
 
 #define M_E        2.71828182845904523536
 #define M_LOG2E    1.44269504088896340736
