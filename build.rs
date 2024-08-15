@@ -27,10 +27,22 @@ fn main() -> anyhow::Result<()> {
     builder
         .files(
             core::iter::once(std::path::PathBuf::from("lib/signgam.c"))
-                .chain(get_source_files(glob::glob("vendor/src/binary32/*/")?, "f.c"))
-                .chain(get_source_files(glob::glob("vendor/src/binary64/*/")?, ".c")),
+                .chain(get_source_files(
+                    glob::glob("vendor/src/binary32/*/")?,
+                    "f.c",
+                ))
+                .chain(get_source_files(
+                    glob::glob("vendor/src/binary64/*/")?,
+                    ".c",
+                )),
         )
-        .include("include");
+        .include("include")
+        .flag_if_supported({
+            let mut flag: std::ffi::OsString = "-march=".into();
+            flag.push(std::env::var_os("TARGET_CPU").unwrap_or_else(|| "native".into()));
+            flag
+        })
+        .cargo_warnings(false);
 
     // Builtin compiler is too old to handle __builtin_roundeven
     #[cfg(target_os = "macos")]
