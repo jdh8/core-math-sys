@@ -34,7 +34,7 @@ float cr_log2p1f(float);
 float cr_powf(float, float);
 float cr_rsqrtf(float);
 float cr_sinf(float);
-float cr_sincosf(float);
+void cr_sincosf(float, float *s, float *c);
 float cr_sinhf(float);
 float cr_sinpif(float);
 float cr_tanf(float);
