@@ -1,4 +1,4 @@
 [submodule "vendor"]
 	path = vendor
-	url = https://github.com/jdh8/core-math-c.git
-	branch = jdh8/rust
+	url = https://gitlab.inria.fr/core-math/core-math.git
+	branch = master

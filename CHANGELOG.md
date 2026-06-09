@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- markdownlint-disable no-duplicate-heading -->
 
+## [1.0.2] - 2026-06-09
+
+### Changed
+
+- Track the official CORE-MATH repository again. The vendored submodule now
+  points at `https://gitlab.inria.fr/core-math/core-math.git` (branch `master`)
+  instead of a personal fork, and is advanced to the latest upstream commit.
+  The fork existed only to carry an `issignaling` compatibility patch, which
+  upstream has since fixed by renaming the symbol to `is_signaling`; the fork
+  is therefore obsolete. No change to the public API.
+
 ## [1.0.1] - 2026-05-23
 
 ### Documentation
@@ -74,6 +85,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 "Try minimalizing everything", "Build the library with plain C" — are
 rolled up into this entry as pre-public iterations.)
 
+[1.0.2]: https://github.com/jdh8/core-math-sys/releases/tag/1.0.2
 [1.0.1]: https://github.com/jdh8/core-math-sys/releases/tag/1.0.1
 [1.0.0]: https://github.com/jdh8/core-math-sys/releases/tag/1.0.0
 [0.2.0]: https://github.com/jdh8/core-math-sys/releases/tag/0.2.0
