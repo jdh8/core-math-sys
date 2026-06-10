@@ -1,6 +1,7 @@
 [package]
 name = "core-math-sys"
-version = "1.0.2"
+version = "1.0.3"
+links = "core_math"
 authors = ["Chen-Pang He (https://jdh8.org)"]
 edition = "2021"
 description = "Generate bindings to CORE-MATH"

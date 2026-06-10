@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- markdownlint-disable no-duplicate-heading -->
 
+## [1.0.3] - 2026-06-10
+
+### Changed
+
+- Add `links = "core_math"` to `[package]` in `Cargo.toml` so Cargo
+  recognizes this crate as the native-link provider and lib.rs no longer
+  reports the `*-sys crate without links property` warning.
+
 ## [1.0.2] - 2026-06-09
 
 ### Changed
@@ -85,6 +93,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 "Try minimalizing everything", "Build the library with plain C" — are
 rolled up into this entry as pre-public iterations.)
 
+[1.0.3]: https://github.com/jdh8/core-math-sys/releases/tag/1.0.3
 [1.0.2]: https://github.com/jdh8/core-math-sys/releases/tag/1.0.2
 [1.0.1]: https://github.com/jdh8/core-math-sys/releases/tag/1.0.1
 [1.0.0]: https://github.com/jdh8/core-math-sys/releases/tag/1.0.0
