@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- markdownlint-disable no-duplicate-heading -->
 
+## [1.1.0] - 2026-06-13
+
+### Added
+
+- Export four correctly-rounded functions that were already compiled into the
+  static library but lacked bindings: `cr_lgamma`, `cr_tgamma`, and `cr_sincos`
+  (`f64`), plus `cr_compoundf` (`f32`). This closes the asymmetry where only the
+  single-precision `cr_lgammaf`, `cr_tgammaf`, and `cr_sincosf` were available.
+  The change is purely additive — only the bindings are new, so existing code is
+  unaffected.
+
 ## [1.0.3] - 2026-06-10
 
 ### Changed
