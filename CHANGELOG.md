@@ -36,6 +36,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [`f16`]: https://doc.rust-lang.org/std/primitive.f16.html
 [`f128`]: https://doc.rust-lang.org/std/primitive.f128.html
 
+### Changed
+
+- Adopt the Rust 2024 edition and declare `rust-version = "1.85"` (enforced by
+  a new CI job). The practical impact is small: the effective MSRV was already
+  ≥ 1.82 because bindgen 0.72 emits `unsafe extern` blocks in the generated
+  bindings. Declaring the MSRV means toolchains older than 1.85 now get a
+  clear Cargo error (and MSRV-aware dependency resolution) instead of a
+  confusing syntax error.
+
 ## [1.0.3] - 2026-06-10
 
 ### Changed

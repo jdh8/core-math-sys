@@ -19,6 +19,17 @@ jobs:
     - name: Run tests
       run: cargo test --verbose
 
+  msrv:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+    - name: Install Rust 1.85
+      run: rustup toolchain install 1.85 --profile minimal
+    - name: Run tests with MSRV
+      run: cargo +1.85 test --verbose
+
   # f16 needs GCC 12+ or Clang 15+; f128 needs Clang 15+ or GCC 14+
   # (binary128 sources use __builtin_addcl). Both need nightly Rust for
   # the unstable f16/f128 primitives. ubuntu-24.04 ships gcc 13, clang 18.

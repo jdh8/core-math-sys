@@ -18,8 +18,8 @@ directly instead, which provides a safe Rusty interface.
 ## Cargo features
 
 The default build exposes the `f32` and `f64` functions and works on stable
-Rust.  Functions on more exotic types are opt-in because their Rust primitives
-are unstable and their C types need a recent compiler:
+Rust (1.85+).  Functions on more exotic types are opt-in because their Rust
+primitives are unstable and their C types need a recent compiler:
 
 - `f16` — binary16 functions (`cr_*f16`, 43 functions).  Requires nightly Rust
   for the unstable [`f16`](https://doc.rust-lang.org/std/primitive.f16.html)
