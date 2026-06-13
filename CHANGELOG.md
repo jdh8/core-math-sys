@@ -17,6 +17,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   single-precision `cr_lgammaf`, `cr_tgammaf`, and `cr_sincosf` were available.
   The change is purely additive — only the bindings are new, so existing code is
   unaffected.
+- New opt-in Cargo features exposing CORE-MATH functions on more types:
+  - `f16` — all 43 binary16 functions (`cr_expf16`, `cr_sqrtf16`, …) typed
+    with the unstable [`f16`] primitive. Needs nightly Rust and a C compiler
+    with `_Float16` and `__builtin_roundeven` support (GCC 12+ or Clang 17+).
+  - `f128` — the 9 binary128 functions CORE-MATH currently provides
+    (`cr_cbrtq`, `cr_expq`, `cr_exp10q`, `cr_exp2q`, `cr_expm1q`, `cr_hypotq`,
+    `cr_logq`, `cr_rsqrtq`, `cr_sqrtq`) typed with the unstable [`f128`]
+    primitive. Needs nightly Rust and Clang 15+ or GCC 14+ (the C sources use
+    `__builtin_addcl`).
+
+  Both features are off by default, so the default build is unchanged and
+  stays stable-compatible. bfloat16 (`half::bf16`) support was evaluated and
+  deferred: C `__bf16` is passed in floating-point registers while
+  `half::bf16` has integer-register ABI, so bindings would need C shims, and
+  `__bf16` arithmetic requires GCC 13+ or Clang 17+.
+
+[`f16`]: https://doc.rust-lang.org/std/primitive.f16.html
+[`f128`]: https://doc.rust-lang.org/std/primitive.f128.html
 
 ## [1.0.3] - 2026-06-10
 

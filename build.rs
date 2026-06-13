@@ -23,16 +23,38 @@ fn main() -> anyhow::Result<()> {
         .generate()?
         .write_to_file(std::path::PathBuf::from(out_dir).join("bindings.rs"))?;
 
-    let f32_sources = get_source_files(glob::glob("vendor/src/binary32/*/")?, "f.c");
-    let f64_sources = get_source_files(glob::glob("vendor/src/binary64/*/")?, ".c");
+    // rustdoc never links; docs.rs's C compiler may not support f16/f128
+    if std::env::var_os("DOCS_RS").is_some() {
+        return Ok(());
+    }
+
+    let feature = |name: &str| std::env::var_os(format!("CARGO_FEATURE_{name}")).is_some();
+
+    let mut sources = vec![std::path::PathBuf::from("lib/signgam.c")];
+    sources.extend(get_source_files(
+        glob::glob("vendor/src/binary32/*/")?,
+        "f.c",
+    ));
+    sources.extend(get_source_files(
+        glob::glob("vendor/src/binary64/*/")?,
+        ".c",
+    ));
+    if feature("F16") {
+        sources.extend(get_source_files(
+            glob::glob("vendor/src/binary16/*/")?,
+            "f16.c",
+        ));
+    }
+    if feature("F128") {
+        sources.extend(get_source_files(
+            glob::glob("vendor/src/binary128/*/")?,
+            "q.c",
+        ));
+    }
 
     let mut builder = cc::Build::new();
     builder
-        .files(
-            core::iter::once(std::path::PathBuf::from("lib/signgam.c"))
-                .chain(f32_sources)
-                .chain(f64_sources),
-        )
+        .files(sources)
         .flag_if_supported({
             let mut flag: std::ffi::OsString = "-march=".into();
             flag.push(std::env::var_os("TARGET_CPU").unwrap_or_else(|| "native".into()));

@@ -11,6 +11,13 @@ categories = ["mathematics", "no-std"]
 keywords = ["floating-point", "trigonometry", "exponential", "logarithm", "special-functions"]
 exclude = ["/vendor/**/*.wc", "/vendor/doc"]
 
+[features]
+f16 = []
+f128 = []
+
+[package.metadata.docs.rs]
+all-features = true
+
 [profile.dev]
 opt-level = 3
 
