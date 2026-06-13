@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- markdownlint-disable no-duplicate-heading -->
 
+## [Unreleased]
+
+### Fixed
+
+- Fix the `f128` build with Clang 16 and newer (including the Clang 18 used in
+  CI): glibc declares the `*f128` math functions only for GCC, the binary128
+  sources call them in non-`cr_` alias wrappers (`sqrtq`, `expq`, …), and
+  Clang 16 turned the resulting implicit declarations into hard errors. The
+  build script now force-includes a small header declaring those functions
+  when compiling with Clang. This also gives the alias wrappers correct
+  prototypes on Clang 15, which previously compiled them against an implicit
+  `int` return type that made the aliases (never the bound `cr_*` functions)
+  silently unusable.
+
 ## [1.1.0] - 2026-06-13
 
 ### Added

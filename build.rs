@@ -66,6 +66,14 @@ fn main() -> anyhow::Result<()> {
     #[cfg(target_os = "macos")]
     builder.compiler("clang");
 
+    // glibc declares the *f128 functions only for GCC, but the binary128
+    // sources call them in alias wrappers, which Clang 16+ rejects as
+    // implicit declarations
+    if feature("F128") && builder.get_compiler().is_like_clang() {
+        builder.flag("-include").flag("lib/f128-decls.h");
+        println!("cargo:rerun-if-changed=lib/f128-decls.h");
+    }
+
     builder.try_compile("core-math")?;
     Ok(())
 }
