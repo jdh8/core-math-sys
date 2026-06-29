@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- markdownlint-disable no-duplicate-heading -->
 
+## [Unreleased]
+
+### Fixed
+
+- Raise the `anyhow` build-dependency floor from `1.0` to `1.0.14`. `build.rs`
+  calls `.context(...)` on the `Option` returned by
+  `std::env::var_os("OUT_DIR")`; `anyhow` did not implement `Context` for
+  `Option` until 1.0.3, and 1.0.3–1.0.13 no longer compile on a current `rustc`
+  (their backtrace shim predates anyhow's build-script compiler probe). The old
+  `"1.0"` caret bound permitted all of those, so resolving with
+  `cargo -Z minimal-versions` picked a version that failed to build (#1). 1.0.14
+  is the lowest version that both provides the API and compiles on the supported
+  stable and nightly toolchains. The upper bound (`< 2.0.0`) is unchanged, so
+  dependency flexibility is preserved.
+
 ## [1.1.1] - 2026-06-13
 
 ### Fixed
