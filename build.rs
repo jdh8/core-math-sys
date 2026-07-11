@@ -1,20 +1,24 @@
-use anyhow::Context as _;
-
 fn get_source_files<'a>(
-    dirs: glob::Paths,
-    suffix: impl AsRef<std::ffi::OsStr> + 'a,
+    dirs: impl Iterator<Item = std::path::PathBuf> + 'a,
+    suffix: &'a str,
 ) -> impl Iterator<Item = std::path::PathBuf> + 'a {
-    dirs.flatten().filter_map(move |mut path| {
+    dirs.filter_map(move |mut path| {
         let stem = path.file_stem()?;
         let mut name = stem.to_owned();
-        name.push(suffix.as_ref());
+        name.push(suffix);
         path.push(name);
         path.is_file().then_some(path)
     })
 }
 
-fn main() -> anyhow::Result<()> {
-    let out_dir = std::env::var_os("OUT_DIR").context("OUT_DIR not set")?;
+fn subdirs(parent: &str) -> std::io::Result<impl Iterator<Item = std::path::PathBuf>> {
+    Ok(std::fs::read_dir(parent)?
+        .flatten()
+        .map(|entry| entry.path()))
+}
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let out_dir = std::env::var_os("OUT_DIR").ok_or("OUT_DIR not set")?;
 
     bindgen::Builder::default()
         .header("include/core-math.h")
@@ -31,25 +35,13 @@ fn main() -> anyhow::Result<()> {
     let feature = |name: &str| std::env::var_os(format!("CARGO_FEATURE_{name}")).is_some();
 
     let mut sources = vec![std::path::PathBuf::from("lib/signgam.c")];
-    sources.extend(get_source_files(
-        glob::glob("vendor/src/binary32/*/")?,
-        "f.c",
-    ));
-    sources.extend(get_source_files(
-        glob::glob("vendor/src/binary64/*/")?,
-        ".c",
-    ));
+    sources.extend(get_source_files(subdirs("vendor/src/binary32")?, "f.c"));
+    sources.extend(get_source_files(subdirs("vendor/src/binary64")?, ".c"));
     if feature("F16") {
-        sources.extend(get_source_files(
-            glob::glob("vendor/src/binary16/*/")?,
-            "f16.c",
-        ));
+        sources.extend(get_source_files(subdirs("vendor/src/binary16")?, "f16.c"));
     }
     if feature("F128") {
-        sources.extend(get_source_files(
-            glob::glob("vendor/src/binary128/*/")?,
-            "q.c",
-        ));
+        sources.extend(get_source_files(subdirs("vendor/src/binary128")?, "q.c"));
     }
 
     let mut builder = cc::Build::new();

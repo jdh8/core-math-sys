@@ -1,5 +1,5 @@
 #![cfg(feature = "f16")]
-#![cfg_attr(feature = "f16", feature(f16))]
+#![feature(f16)]
 
 #[test]
 fn sanity() {
