@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Bind `cr_atan2q`, the correctly rounded binary128 (`__float128`) two-argument
+  arctangent, newly implemented upstream. Requires the `f128` feature. The
+  vendored CORE-MATH submodule is advanced to upstream `8c7c00f6`, which also
+  brings accuracy, proof, and worst-case-table improvements to many existing
+  functions (`exp`, `tanh`, `log`, `sin`, `cos`, ...) with no API changes.
+
 ### Fixed
 
 - Raise the `anyhow` build-dependency floor from `1.0` to `1.0.14`. `build.rs`
