@@ -2,7 +2,16 @@
 #![cfg_attr(not(test), no_std)]
 #![cfg_attr(feature = "f16", feature(f16))]
 #![cfg_attr(feature = "f128", feature(f128))]
-include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
+
+/// Sign of the gamma function, set by [`cr_lgamma`] and [`cr_lgammaf`]
+#[unsafe(no_mangle)]
+pub static mut signgam: core::ffi::c_int = 0;
+
+mod binary32;
+pub use binary32::*;
+
+mod binary64;
+pub use binary64::*;
 
 #[cfg(feature = "f16")]
 mod binary16;

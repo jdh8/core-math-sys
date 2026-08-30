@@ -16,6 +16,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Hand-write the `f32` and `f64` bindings instead of generating them with
+  `bindgen`.  The exposed functions and their signatures are unchanged, but
+  building the crate no longer needs `libclang`, and the build-dependency tree
+  shrinks from 32 crates to 8.
+- Define `signgam` in Rust instead of in a one-line C file.
+- On macOS, respect the `CC` environment variable instead of always forcing
+  `clang`.  `cc` already defaults to Apple Clang there.
 - Advance the vendored CORE-MATH submodule to upstream `d350cca6`, bringing
   correctness fixes to existing binary16, binary32, binary64, and binary128
   functions with no further API changes.

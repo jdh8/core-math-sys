@@ -12,23 +12,18 @@ env:
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        toolchain: [stable, "1.85"]
     steps:
     - uses: actions/checkout@v4
       with:
         submodules: recursive
+    - name: Install Rust ${{ matrix.toolchain }}
+      run: rustup toolchain install ${{ matrix.toolchain }} --profile minimal
     - name: Run tests
-      run: cargo test --verbose
-
-  msrv:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: recursive
-    - name: Install Rust 1.85
-      run: rustup toolchain install 1.85 --profile minimal
-    - name: Run tests with MSRV
-      run: cargo +1.85 test --verbose
+      run: cargo +${{ matrix.toolchain }} test --verbose
 
   # f16 needs GCC 12+ or Clang 17+ (binary16 sources use _Float16 and
   # __builtin_roundeven); f128 needs GCC 14+ or Clang 15+ (binary128
