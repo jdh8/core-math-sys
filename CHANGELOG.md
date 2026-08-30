@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- markdownlint-disable no-duplicate-heading -->
 
+## [Unreleased]
+
+### Added
+
+- Bind the new binary128 functions `cr_acosq`, `cr_asinq`, and `cr_atanq` behind
+  the `f128` feature.
+
+### Changed
+
+- Advance the vendored CORE-MATH submodule to upstream `d350cca6`, bringing
+  correctness fixes to existing binary16, binary32, binary64, and binary128
+  functions with no further API changes.
+
 ## [1.2.0] - 2026-07-11
 
 ### Added

@@ -6,6 +6,9 @@
  * Clang the declarations; the symbols themselves are in libm since glibc 2.26.
  */
 #if defined __clang__ && defined __x86_64__
+__float128 acosf128(__float128);
+__float128 asinf128(__float128);
+__float128 atanf128(__float128);
 __float128 atan2f128(__float128, __float128);
 __float128 cbrtf128(__float128);
 __float128 exp10f128(__float128);

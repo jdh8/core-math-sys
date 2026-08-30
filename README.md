@@ -25,7 +25,7 @@ primitives are unstable and their C types need a recent compiler:
   for the unstable [`f16`](https://doc.rust-lang.org/std/primitive.f16.html)
   primitive, and GCC&nbsp;12+ or Clang&nbsp;17+ (the C sources need `_Float16`
   and `__builtin_roundeven`).
-- `f128` — binary128 functions (`cr_*q`, 9 functions).  Requires nightly Rust
+- `f128` — binary128 functions (`cr_*q`, 13 functions).  Requires nightly Rust
   for the unstable [`f128`](https://doc.rust-lang.org/std/primitive.f128.html)
   primitive, and Clang&nbsp;15+ or GCC&nbsp;14+ (the C sources use
   `__builtin_addcl`).

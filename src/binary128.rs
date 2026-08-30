@@ -2,6 +2,9 @@
 //! because bindgen cannot yet emit the unstable `f128` primitive.
 
 unsafe extern "C" {
+    pub fn cr_acosq(x: f128) -> f128;
+    pub fn cr_asinq(x: f128) -> f128;
+    pub fn cr_atanq(x: f128) -> f128;
     pub fn cr_atan2q(y: f128, x: f128) -> f128;
     pub fn cr_cbrtq(x: f128) -> f128;
     pub fn cr_expq(x: f128) -> f128;
