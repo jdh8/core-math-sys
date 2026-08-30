@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- markdownlint-disable no-duplicate-heading -->
 
-## [Unreleased]
+## [1.3.0] - 2026-08-30
 
 ### Added
 
@@ -185,6 +185,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 "Try minimalizing everything", "Build the library with plain C" — are
 rolled up into this entry as pre-public iterations.)
 
+[1.3.0]: https://github.com/jdh8/core-math-sys/releases/tag/1.3.0
 [1.2.0]: https://github.com/jdh8/core-math-sys/releases/tag/1.2.0
 [1.1.1]: https://github.com/jdh8/core-math-sys/releases/tag/1.1.1
 [1.1.0]: https://github.com/jdh8/core-math-sys/releases/tag/1.1.0
