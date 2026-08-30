@@ -1,6 +1,6 @@
 [package]
 name = "core-math-sys"
-version = "1.3.0"
+version = "1.4.0-dev"
 links = "core_math"
 authors = ["Chen-Pang He (https://jdh8.org)"]
 edition = "2024"
