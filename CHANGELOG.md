@@ -9,6 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Bind the new binary128 functions `cr_sinq` and `cr_cosq` behind the `f128`
+  feature.
+
+### Changed
+
+- Advance the vendored CORE-MATH submodule to upstream `85430b3e`.  Besides the
+  new functions, this fixes incorrect rounding in the fast paths of several
+  binary64 functions (`asin`, `pow`, `exp2`, `atan`, `expm1`, `tanh`, ...) and
+  spurious floating-point exceptions in `hypot`, `pow`, `cospi`, and
+  `compoundf`.
+
 ## [1.3.0] - 2026-08-30
 
 ### Added

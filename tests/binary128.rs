@@ -6,6 +6,8 @@ fn sanity() {
     assert!(unsafe { core_math_sys::cr_acosq(1.0) }.eq(&0.0));
     assert!(unsafe { core_math_sys::cr_asinq(0.0) }.eq(&0.0));
     assert!(unsafe { core_math_sys::cr_atanq(0.0) }.eq(&0.0));
+    assert!(unsafe { core_math_sys::cr_cosq(0.0) }.eq(&1.0));
+    assert!(unsafe { core_math_sys::cr_sinq(0.0) }.eq(&0.0));
     assert!(unsafe { core_math_sys::cr_expq(0.0) }.eq(&1.0));
     assert!(unsafe { core_math_sys::cr_sqrtq(4.0) }.eq(&2.0));
     assert!(unsafe { core_math_sys::cr_hypotq(3.0, 4.0) }.eq(&5.0));

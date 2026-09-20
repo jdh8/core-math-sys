@@ -11,10 +11,12 @@ __float128 asinf128(__float128);
 __float128 atanf128(__float128);
 __float128 atan2f128(__float128, __float128);
 __float128 cbrtf128(__float128);
+__float128 cosf128(__float128);
 __float128 exp10f128(__float128);
 __float128 exp2f128(__float128);
 __float128 expf128(__float128);
 __float128 expm1f128(__float128);
 __float128 hypotf128(__float128, __float128);
+__float128 sinf128(__float128);
 __float128 sqrtf128(__float128);
 #endif
